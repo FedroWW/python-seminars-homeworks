@@ -17,7 +17,7 @@ def find_shortest_path(n, m, s, t, edges):
         dist[u][v] = w
         next_vertex[u][v] = v
 
-    # Алгоритм Флойда-Уоршелла
+    # Алгоритм Уоршелла
     for k in range(n):
         for i in range(n):
             for j in range(n):
@@ -125,7 +125,7 @@ def find_min_tariffs(n, tariffs):
             if i != j and tariffs[i][j] != -1:
                 graph[i].append((j, tariffs[i][j]))
 
-    # Применяем алгоритм Дейкстры для каждой вершины
+    # Дейкстра для каждой вершины
     result = []
     for start in range(n):
         distances = dijkstra(graph, start)
@@ -174,4 +174,5 @@ for i, test in enumerate(test_cases, 1):
     for row in test['expected']:
         print(' '.join(str(x) if x < 999999 else '-1' for x in row))
     print("-" * 60)
+
 '''
