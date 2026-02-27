@@ -5,17 +5,17 @@ def find_shortest_path(n, m, s, t, edges):
 
     # Создаем матрицы расстояний и следующей вершины
     dist = [[INF] * n for _ in range(n)]
-    next_vertex = [[-1] * n for _ in range(n)]
+    next_v = [[-1] * n for _ in range(n)]
 
     # Инициализация
     for i in range(n):
         dist[i][i] = 0
-        next_vertex[i][i] = i
+        next_v[i][i] = i
 
     # Заполняем ребра
     for u, v, w in edges:
         dist[u][v] = w
-        next_vertex[u][v] = v
+        next_v[u][v] = v
 
     # Алгоритм Уоршелла
     for k in range(n):
@@ -23,7 +23,7 @@ def find_shortest_path(n, m, s, t, edges):
             for j in range(n):
                 if dist[i][k] + dist[k][j] < dist[i][j]:
                     dist[i][j] = dist[i][k] + dist[k][j]
-                    next_vertex[i][j] = next_vertex[i][k]
+                    next_v[i][j] = next_v[i][k]
 
     # Проверяем, существует ли путь
     if dist[s][t] == INF:
@@ -33,7 +33,7 @@ def find_shortest_path(n, m, s, t, edges):
     path = [s]
     current = s
     while current != t:
-        current = next_vertex[current][t]
+        current = next_v[current][t]
         path.append(current)
 
     return f"{dist[s][t]}\n{' '.join(map(str, path))}"
@@ -176,3 +176,4 @@ for i, test in enumerate(test_cases, 1):
     print("-" * 60)
 
 '''
+
