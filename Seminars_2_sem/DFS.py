@@ -78,4 +78,31 @@ if dfs_path(graph, 0, 4, visited, parent):
     path.reverse()
     print("Путь:", path)  # [0, 1, 3, 4]
 
+_______________
+#РАСКРАСКА
+_______________
 
+color = ['white' for i in graph.keys()]
+def dfs_visit(graph, v):
+    color[v] = 'gray'
+    print(v)
+
+    for u in graph[v]:
+        if color[u] == 'gray':
+            print('has cycle')
+        if color[u] == 'white':
+            dfs_visit(graph, u)
+
+    color[v] = 'black'
+
+def dfs_stack(graph, start):
+    visited = set()
+    stack = [start]
+    while stack:
+        u = stack.pop()
+        if u not in visited:
+            visited.add(u)
+            print(u)
+            for i in range(len(graph[u])):
+                stack.append(graph[u][i])
+ 
