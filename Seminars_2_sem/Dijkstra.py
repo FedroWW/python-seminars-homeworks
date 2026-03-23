@@ -80,3 +80,25 @@ graph = [
 
 distances = dijkstra(graph, 0)
 print(f"Кратчайшие расстояния от 0: {distances}")
+
+#_______________________
+#С ВОССТАНОВЛЕНИЕМ ПУТИ
+#-----------------------
+
+def Dijkstra(G,s):
+    V = len(G.keys()) + 1
+    dist = [float('inf') for i in range(V)]
+    prev = [None for i in range(V)]
+    dist[s] = 0
+    S = set()
+    S.add(0)
+    while len(S) < V:
+        v = dist.index(min(dist)) # можно поменять на кучу
+        S.add(v)
+        for u, w in G[v]:
+            if u not in S and dist[u] > dist[v] + w:
+                prev[u] = v
+                dist[u] = dist[v] + w
+        dist[v] = float('inf')
+
+    print(prev) # получаем кратчайшие пути, можно по ним восстановить стоимости
